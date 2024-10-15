@@ -32,7 +32,7 @@ def books():
         return f"Error: {str(e)}"
 
 
-@app.route("/Books/addbooks", methods=['GET', 'POST'])
+@app.route('/Books/addbooks', methods=['GET', 'POST'])
 def addbooks():
     if request.method == 'POST':
         title = request.form['title']
@@ -76,7 +76,7 @@ def update_title(id):
         return redirect(url_for("Books/books"))
 
 
-@app.route("/delete_book/<id>", methods=['GET', 'POST'])
+@app.route('/delete_book/<id>', methods=['GET', 'POST'])
 def delete_book(id):
     try:
         cur = mysql.connection.cursor()
