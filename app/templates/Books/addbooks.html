@@ -1,11 +1,16 @@
 {% include 'Books/head.html' %}
 
 <form>
-  {% block content %}
+
+
+  
+{% block title %}
 ADD BOOK
 {% endblock %}
 {% block content %}
-  <form action="/Books/addbooks" methods =["POST"])
+
+<div class = "container-fluid">
+  <form action='/Books/addbooks', methods ="POST">
     <div class="mb-3">
       <label form="class=form-label">TITLE</label>
       <input type="text" class="form-control" name="title"placeholder="title"/>
@@ -23,5 +28,5 @@ ADD BOOK
 <button type="submit">Save</button>
   </form>
 {% endblock%}
-  {% include 'Books/footer.html' %}
+{% include 'Books/footer.html' %}
 </form>

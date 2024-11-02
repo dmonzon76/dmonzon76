@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 import os
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 app = Flask(__name__)
 
@@ -32,7 +35,7 @@ def books():
         return f"Error: {str(e)}"
 
 
-@app.route('/Books/addbooks', methods=['GET', 'POST'])
+@app.route('/Books/addbooks', methods=['GET','POST'])
 def addbooks():
     if request.method == 'POST':
         title = request.form['title']
@@ -43,6 +46,7 @@ def addbooks():
             'INSERT INTO titles (title, location, isbn) VALUES (%s, %s, %s)', (title, location, isbn))
         mysql.connection.commit()
         return render_template('Books/books.html')
+    return render_template('Books/addbooks.html')
 
 
 @app.route('/Books/edit_book/<int:id>', methods=['GET', 'POST'])

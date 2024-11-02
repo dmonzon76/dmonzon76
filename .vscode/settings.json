@@ -1,11 +1,13 @@
 {
     "cSpell.words": [
         "addbooks",
+        "biblos",
         "CURSORCLASS",
         "idauthor",
         "ideditorial",
         "idtitles",
         "mysecretkey",
+        "mysqldb",
         "pymysql",
         "sqlalchemy"
     ],
