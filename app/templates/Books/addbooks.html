@@ -1,16 +1,7 @@
 {% include 'Books/head.html' %}
 
-<form>
 
-
-  
-{% block title %}
-ADD BOOK
-{% endblock %}
-{% block content %}
-
-<div class = "container-fluid">
-  <form action='/Books/addbooks', methods ="POST">
+  <form action="/Books/addbooks" method ="POST">
     <div class="mb-3">
       <label form="class=form-label">TITLE</label>
       <input type="text" class="form-control" name="title"placeholder="title"/>
@@ -23,10 +14,10 @@ ADD BOOK
   <label form="class=form-label">ISBN</label>
   <input type="text" class="form-control" name="isbn"placeholder="isbn"/>
 </div>
-    
 
 <button type="submit">Save</button>
   </form>
-{% endblock%}
-{% include 'Books/footer.html' %}
-</form>
+
+  {% include 'Books/footer.html' %}
+
+

@@ -15,8 +15,7 @@ app.config['MYSQL_DB'] = 'biblos12'
 mysql = MySQL(app)
 
 # Settings
-app.secret_key = 'mysecretkey'
-
+app.secret_key = 'mysecretkey' 
 
 @app.route('/')
 def index():
@@ -46,7 +45,8 @@ def addbooks():
             'INSERT INTO titles (title, location, isbn) VALUES (%s, %s, %s)', (title, location, isbn))
         mysql.connection.commit()
         return render_template('Books/books.html')
-    return render_template('Books/addbooks.html')
+    else:
+        return render_template('Books/addbooks.html')
 
 
 @app.route('/Books/edit_book/<int:id>', methods=['GET', 'POST'])
