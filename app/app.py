@@ -95,6 +95,30 @@ def delete_book(id):
     except Exception as e:
         return f"Error: {str(e)}"
 
+@app.route('/Authors/authors', methods=['GET', 'POST'])
+def authors():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM authors')
+        data = cur.fetchall()
+        print(data)  # For debugging purposes
+        return render_template('Authors/authors.html', titles=data)
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+@app.route('/Authors/edit_author/<int:id>', methods=['GET', 'POST'])
+def edit_author(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(
+            'SELECT last_name, names, nationality FROM authors WHERE id=%s', (id,))
+        data = cur.fetchone()
+        mysql.connection.commit()
+        return render_template('Authors/edit_author.html', title=data)
+    except Exception as e:
+        return f"Error: {str(e)}"        
+
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

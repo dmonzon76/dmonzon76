@@ -1,0 +1,37 @@
+{% include 'Books/head.html' %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-borderless table-primary align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>id</th>
+                <th>last_name</th>
+                <th>names</th>
+                <th>nationality</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for author in authors %}
+            <tr>
+                <td>{{ author.0 }}</td>
+                <td>{{ author.1 }}</td>
+                <td>{{ author.2 }}</td>
+                <td>{{ author.3 }}</td>
+                
+                <td>
+                    <a href='/Authors/edit_author/{{ author.0}}' class="btn btn-success">edit</a>
+                    <a href='/delete_author/{{author.0}}'class="btn btn-danger btn-delete">Delete</a>
+                    
+                </td>
+            </tr>
+            <script src='{{url_for('static', filename='js/main.js')}}'></script>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% include 'Books/footer.html' %}
+
+         
