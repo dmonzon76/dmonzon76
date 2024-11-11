@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+  <form action="/Books/addbooks" method ="POST">
+    <div class="mb-3">
+      <label form="class=form-label">TITLE</label>
+      <input type="text" class="form-control" name="title"placeholder="title"/>
+    </div>
+    <div class="mb-3">
+  <label form="class=form-label">LOCATION</label>
+  <input type="text" class="form-control" name="location"placeholder="location"/>
+</div>
+<div class="mb-3">
+  <label form="class=form-label">ISBN</label>
+  <input type="text" class="form-control" name="isbn"placeholder="isbn"/>
+</div>
+
+<button type="submit">Save</button>
+  </form>

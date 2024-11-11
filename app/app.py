@@ -19,7 +19,7 @@ app.secret_key = 'mysecretkey'
 
 @app.route('/')
 def index():
-    return render_template('Books/index.html')
+    return render_template('index.html')
 
 
 @app.route('/Books/books', methods=['GET', 'POST'])
