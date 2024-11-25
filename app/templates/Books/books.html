@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% include 'base.html' %}
 
 {% block content %}
 <div class="table-responsive">
@@ -25,55 +25,14 @@
                 <td>{{ title.5 }}</td>
                 <td>
                     <a href='/Books/edit_book/{{ title.0}}' class="btn btn-success">edit</a>
-                    <a href='/delete_book/{{title.0}}'class="btn btn-danger btn-delete">Delete</a>
-                    
+                    <a href='/delete_book/{{title.0}}' class="btn btn-danger btn-delete">Delete</a>
+
                 </td>
             </tr>
-            <script src='{{url_for('static', filename='js/main.js')}}'></script>
+            <script src="{{url_for('static', filename='js/main.js' )}}"></script>
             {% endfor %}
         </tbody>
     </table>
 </div>
 {% endblock %}
 {% include "footer.html" %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

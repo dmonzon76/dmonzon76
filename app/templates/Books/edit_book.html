@@ -1,4 +1,4 @@
-{% extends 'Base.html' %}
+{% include 'Base.html' %}
 
 <form>
 
@@ -24,7 +24,9 @@
         <label for="title" class="form-label">ISBN</label>
         <input  required type="text" class="input" placeholder="isbn" name="isbn" value="{{ title.2 }}">
     </div>
-    <button type="submit">Save</buttom>
+    <button type="submit" class="btn btn-primary btn-block">
+        Update
+    </button>
         
     {% endblock %}
 </form>            

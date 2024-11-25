@@ -1,34 +1,39 @@
-{% extendes "base.html" %}
+{% include "base.html" %}
 
 <form>
 
-{% block titulo %}
+    {% block titulo %}
     EDIT AUTHOR
-{% endblock %}
-{% block content %}
-<div classs="row">
-    <div class="col 4"></div>
-    <div class="col 4"></div>
-<form action="/Authors/edit_author/{{ title.0 }}" method="POST">
-    <input type="hidden" name="id" value="{{ title.0 }}">
-
-    <div class="mb-3">
-        <label for="authors" class="form-label">LAST NAME</label>
-        <input  required type="text" class="input" placeholder="last_name" name="last_neme" value="{{ title.0 }}">
-    </div>
-    <div class="mb-3">
-        <label for="authors" class="form-label">NAMES</label>
-        <input  required type="text" class="input" placeholder="names" name="names" value="{{ title.1 }}">
-    </div>
-    <div class="mb-3">
-        <label for="authors" class="form-label">NATIONALITY</label>
-        <input  required type="text" class="input" placeholder="nationality" name="nationality" value="{{ title.2 }}">
-    </div>
-    <button type="submit">Save</buttom>
-        
     {% endblock %}
-</form>            
+    {% block content %}
+    <div classs="row">
+        <div class="col 4"></div>
+        <div class="col 4"></div>
+        <form action="/Authors/edit_author/{{ author.0 }}" method="POST">
+            <input type="hidden" name="id" value="{{ author.0 }}">
+
+            <div class="mb-3">
+                <label for="authors" class="form-label">LAST NAME</label>
+                <input required type="text" class="input" placeholder="last_name" name="last_name"
+                    value="{{ author.0 }}">
+            </div>
+            <div class="mb-3">
+                <label for="authors" class="form-label">NAMES</label>
+                <input required type="text" class="input" placeholder="names" name="names" value="{{ author.1 }}">
+            </div>
+            <div class="mb-3">
+                <label for="authors" class="form-label">NATIONALITY</label>
+                <input required type="text" class="input" placeholder="nationality" name="nationality"
+                    value="{{ author.2 }}">
+            </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+        Update
+    </button>
+    {% endblock %}
+</form>
 {% include "footer.html" %}
 
-    <div class="col 4"></div>
+<div class="col 4"></div>
 </div>

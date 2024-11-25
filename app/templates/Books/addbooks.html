@@ -1,23 +1,21 @@
-{% extends 'base.html' %}
+{% include 'base.html' %}
 
 
-  <form action="/Authors/addauthor" method ="POST">
-    <div class="mb-3">
-      <label form="class=form-label">LAST NAME</label>
-      <input type="text" class="form-control" name="title"placeholder="last_name"/>
-    </div>
-    <div class="mb-3">
-  <label form="class=form-label">NAMES</label>
-  <input type="text" class="form-control" name="location"placeholder="names"/>
-</div>
-<div class="mb-3">
-  <label form="class=form-label">NATIONALITY</label>
-  <input type="text" class="form-control" name="isbn"placeholder="nationality"/>
-</div>
+<form action="/Books/addbooks" method="POST">
+  <div class="mb-3">
+    <label form="class=form-label">TITLE</label>
+    <input type="text" class="form-control" name="title" placeholder="Title" />
+  </div>
+  <div class="mb-3">
+    <label form="class=form-label">LOCATION</label>
+    <input type="text" class="form-control" name="location" placeholder="location" />
+  </div>
+  <div class="mb-3">
+    <label form="class=form-label">ISBN</label>
+    <input type="text" class="form-control" name="isbn" placeholder="isbn" />
+  </div>
 
-<button type="submit">Save</button>
-  </form>
+  <button type="submit">Save</button>
+</form>
 
-  {% include "footer.html" %}
-
-
+{% include "footer.html" %}
