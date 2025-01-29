@@ -9,7 +9,7 @@
     <div classs="row">
         <div class="col 4"></div>
         <div class="col 4"></div>
-        <form action="/Authors/edit_author/{{ author.0 }}" method="POST">
+        <form action="/Authors/update/{{ author.0 }}" methods="POST">
             <input type="hidden" name="id" value="{{ author.0 }}">
 
             <div class="mb-3">
@@ -32,8 +32,9 @@
         Update
     </button>
     {% endblock %}
-</form>
+
 {% include "footer.html" %}
 
 <div class="col 4"></div>
 </div>
+</form>

@@ -45,6 +45,7 @@ def addBooks():
         cur.execute(
             'INSERT INTO titles (title, location, isbn) VALUES (%s, %s, %s)', (title, location, isbn))
         mysql.connection.commit()
+        cur.close()
         return redirect (url_for('Books'))
     else:
         return render_template('Books/addbooks.html')
@@ -60,8 +61,14 @@ def edit_book(id):
         mysql.connection.commit()
         return render_template('Books/edit_book.html', title=data)
     except Exception as e:
+        cur.close()
         return f"Error: {str(e)}"
 
+def get_title(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM titles WHERE id=%s', (id, ))
+    data = cur.fetchone()
+    return data
 
 @app.route('/update/<id>', methods=['POST'])
 def update_title(id):
@@ -70,15 +77,23 @@ def update_title(id):
         location = request.form['location']
         isbn = request.form['isbn']
         cur = mysql.connection.cursor()
-        cur.execute("""
-        UPDATE titles
-        SET title = %s,
-            location = %s,
-            isbn = %s
-        WHERE id = %s    
-        """, (title, location, isbn, id))
-        mysql.connection.commit()
-        return redirect(url_for("Books/books"))
+        try:
+            cur.execute("""
+            UPDATE titles
+            SET title = %s,
+                location = %s,
+                isbn = %s
+            WHERE id = %s    
+            """, (title, location, isbn, id))
+            mysql.connection.commit()
+            #flash("Actualización exitosa", "success")
+        except Exception as e:
+            mysql.connection.rollback()
+            #flash(f"Ocurrió un error: {e}", "danger")
+        finally:
+            cur.close()
+    return redirect(url_for("Books/books"))
+
 
 
 @app.route('/delete_book/<id>', methods=['GET', 'POST'])
@@ -94,6 +109,7 @@ def delete_book(id):
 
         return render_template('Books/books.html', titles=data)
     except Exception as e:
+        cur.close()
         return f"Error: {str(e)}"
 
 
@@ -120,9 +136,28 @@ def edit_author(id):
         mysql.connection.commit()
         return render_template('Authors/edit_author.html', author=data)
     except Exception as e:
+        cur.close()
         return f"Error: {str(e)}"  
 
-
+@app.route('/update<int:id>', methods=['GET','POST'])
+def update_author(id):
+    if request.method == 'POST':      
+        last_name = request.form['last_name']
+        names = request.form['names']
+        nationality = request.form['nationality']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+        UPDATE authors
+        SET last_name = %s,
+            names = %s,
+            nationality = %s
+        WHERE id = %s    
+        """, (last_name, names, nationality, id))
+        mysql.connection.commit()
+        cur.execute('UPDATE last_name, names, nationality FROM authors WHERE id=%s', (id,)) 
+        print("Updated Data: {updated_data}")
+        cur.close()
+    return redirect(url_for("Authors/authors"))    
 
 @app.route('/delete_author/<id>', methods=['GET', 'POST'])
 def delete_author(id):
@@ -137,24 +172,10 @@ def delete_author(id):
 
         return render_template('Authors/authors.html', authors=data)
     except Exception as e:
+        cur.close()
         return f"Error: {str(e)}"
     
-@app.route('/update/<id>', methods=['GET','POST'])
-def update_author(id):
-    if request.method == 'POST':
-        last_name = request.form['last_name']
-        names = request.form['names']
-        nationality = request.form['nationality']
-        cur = mysql.connection.cursor()
-        cur.execute("""
-        UPDATE authors
-        SET last_name = %s,
-            names = %s,
-            nationality = %s
-        WHERE id = %s    
-        """, (last_name, names, nationality, id))
-        mysql.connection.commit()
-        return redirect(url_for("Authors/authors"))    
+
     
 @app.route('/Authors/addauthor', methods=['GET','POST'])
 def addauthor():
