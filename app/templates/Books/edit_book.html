@@ -2,74 +2,35 @@
 
 <form>
 
-{% block titulo %}
+    {% block titulo %}
     EDIT BOOK
-{% endblock %}
-{% block content %}
-<div classs="row">
-    <div class="col 4"></div>
-    <div class="col 4"></div>
-<form action="/Books/edit_book/{{ title.0 }}" method="POST">
-    <input type="hidden" name="id" value="{{ title.0 }}">
-
-    <div class="mb-3">
-        <label for="title" class="form-label">TITLE</label>
-        <input  required type="text" class="input" placeholder="Title" name="title" value="{{ title.0 }}">
-    </div>
-    <div class="mb-3">
-        <label for="title" class="form-label">LOCATION</label>
-        <input  required type="text" class="input" placeholder="location" name="location" value="{{ title.1 }}">
-    </div>
-    <div class="mb-3">
-        <label for="title" class="form-label">ISBN</label>
-        <input  required type="text" class="input" placeholder="isbn" name="isbn" value="{{ title.2 }}">
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">
-        Update
-    </button>
-        
     {% endblock %}
-</form>            
-{% include "footer.html" %}
+    {% block content %}
+    <div classs="row">
+        <div class="col 4"></div>
+        <div class="col 4"></div>
+        <form action="/Books/edit_book/{{ title.0 }}" method="POST">
+            <input type="hidden" name="idtitle" value="{{ title.0 }}">
 
-    <div class="col 4"></div>
-</div>
+            <div class="mb-3">
+                <label for="title" class="form-label">TITLE</label>
+                <input required type="text" class="input" placeholder="Title" name="title" value="{{ title.0 }}">
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">LOCATION</label>
+                <input required type="text" class="input" placeholder="location" name="location" value="{{ title.1 }}">
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">ISBN</label>
+                <input required type="text" class="input" placeholder="isbn" name="isbn" value="{{ title.2 }}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                Update
+            </button>
 
+            {% endblock %}
+        </form>
+        {% include "footer.html" %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <div class="col 4"></div>
+    </div>

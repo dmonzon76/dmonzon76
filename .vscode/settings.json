@@ -30,5 +30,18 @@
         "app"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
-}
+    "python.testing.pytestEnabled": true,
+    "files.autoSave": "onWindowChange",
+    "editor.inlineSuggest.syntaxHighlightingEnabled": true,
+    "terminal.integrated.accessibleViewPreserveCursorPosition": true,
+    "terminal.integrated.automationProfile.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "args": [
+                "-NoLogo",
+                "-NoProfile",
+                "-Command",
+                "Invoke-Expression $(Get-Content -Path $env:USERPROFILE\\.vscode\\settings.json -Raw)"
+            ]
+        },
+    }
