@@ -56,7 +56,7 @@ def edit_book(id):
     try:
         cur = mysql.connection.cursor()
         cur.execute(
-            'SELECT title, location, isbn FROM titles WHERE id=%s', (id,))
+            'SELECT * FROM titles title, location, isbn WHERE id=%s', (id,))
         data = cur.fetchone()
         mysql.connection.commit()
         return render_template('Books/edit_book.html', title=data)
@@ -70,29 +70,8 @@ def get_title(id):
     data = cur.fetchone()
     return data
 
-@app.route('/update/<id>', methods=['POST'])
-def update_title(id):
-    if request.method == 'POST':
-        title = request.form['title']
-        location = request.form['location']
-        isbn = request.form['isbn']
-        cur = mysql.connection.cursor()
-        try:
-            cur.execute("""
-            UPDATE titles
-            SET title = %s,
-                location = %s,
-                isbn = %s
-            WHERE id = %s    
-            """, (title, location, isbn, id))
-            mysql.connection.commit()
-            #flash("Actualización exitosa", "success")
-        except Exception as e:
-            mysql.connection.rollback()
-            #flash(f"Ocurrió un error: {e}", "danger")
-        finally:
-            cur.close()
-    return redirect(url_for("Books/books"))
+
+
 
 
 
@@ -154,7 +133,7 @@ def update_author(id):
         WHERE id = %s    
         """, (last_name, names, nationality, id))
         mysql.connection.commit()
-        cur.execute('UPDATE last_name, names, nationality FROM authors WHERE id=%s', (id,)) 
+        cur.execute('SELECT last_name, names, nationality FROM authors WHERE id=%s', (id,)) 
         print("Updated Data: {updated_data}")
         cur.close()
     return redirect(url_for("Authors/authors"))    
@@ -173,6 +152,9 @@ def delete_author(id):
         return render_template('Authors/authors.html', authors=data)
     except Exception as e:
         cur.close()
+
+        
+        
         return f"Error: {str(e)}"
     
 
@@ -190,7 +172,32 @@ def addauthor():
         return redirect (url_for('authors'))
     else:
         return render_template('Authors/addauthor.html')
-
+    
+#@app.route('/update<int:id>', methods=['GET','POST'])
+def update_author(id):
+    if request.method == 'POST':      
+        last_name = request.form['last_name']
+        names = request.form['names']
+        nationality = request.form['nationality']
+        cur = mysql.connection.cursor()
+        
+        # Actualización de datos en la tabla "authors"
+        cur.execute("""
+        UPDATE authors
+        SET last_name = %s,
+            names = %s,
+            nationality = %s
+        WHERE id = %s    
+        """, (last_name, names, nationality, id))
+        mysql.connection.commit()
+        
+        # Puedes agregar aquí un SELECT si deseas obtener los datos actualizados
+        cur.execute('SELECT * FROM authors last_name, names, nationality  WHERE id=%s', (id,))
+        updated_data = cur.fetchone()  # Recupera los datos actualizados
+        print("Updated Data: {updated_data}")
+        
+        cur.close()
+    return redirect(url_for("Authors/authors"))
 
 
 if __name__ == '__main__':

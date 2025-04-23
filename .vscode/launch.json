@@ -4,6 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "Launch Program", // Required: Name of the configuration
+            "type": "node", // Required: Debugger type
+            "request": "launch", // Required: Type of request
+            "program": "${workspaceFolder}/app.js" // Path to the program to debug
+        }
     
         {
             "name": "Python Debugger: Current File",
